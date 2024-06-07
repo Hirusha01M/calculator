@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title> Calculator</title>
+
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #67a6dd 0%, #223b4d 100%);
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator-screen {
+            width: 100%;
+            height: 70px;
+            border: none;
+            background: #4b4747;
+            color: #e0d2d2;
+            text-align: right;
+            font-size: 2em;
+            padding: 9px;
+            box-sizing: border-box;
+        }
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .btn {
+            border: 1px solid #ccc;
+            background: #f2f2f2;
+            font-size: 1.5em;
+            padding: 20px;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #e4b0b0;
+        }
+        .btn-equal {
+            grid-column: span 2;
+            background: #007BFF;
+            color: #fff;
+        }
+        .btn-equal:hover {
+            background: #688db4;
+        }
+          
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="calculator-screen" id="display" disabled>
+        <div class="calculator-buttons">
+
+            <button type="button" class="btn" onclick="clearScreen()">C</button>
+            <button type="button" class="btn" onclick="deleteLast()">←</button>
+            <button type="button" class="btn" onclick="appendToScreen('/')">/</button>
+            <button type="button" class="btn" onclick="appendToScreen('*')">*</button>
+
+            <button type="button" class="btn" onclick="appendToScreen('7')">7</button>
+            <button type="button" class="btn" onclick="appendToScreen('8')">8</button>
+            <button type="button" class="btn" onclick="appendToScreen('9')">9</button>
+            <button type="button" class="btn" onclick="appendToScreen('-')">-</button>
+
+            <button type="button" class="btn" onclick="appendToScreen('4')">4</button>
+            <button type="button" class="btn" onclick="appendToScreen('5')">5</button>
+            <button type="button" class="btn" onclick="appendToScreen('6')">6</button>
+            <button type="button" class="btn" onclick="appendToScreen('+')">+</button>
+
+            <button type="button" class="btn" onclick="appendToScreen('1')">1</button>
+            <button type="button" class="btn" onclick="appendToScreen('2')">2</button>
+            <button type="button" class="btn" onclick="appendToScreen('3')">3</button>
+            <button type="button" class="btn" onclick="appendToScreen('()')">()</button>
+
+            <button type="button" class="btn" onclick="appendToScreen('.')">.</button>
+            <button type="button" class="btn" onclick="appendToScreen('0')">0</button>
+            <button type="button" class="btn btn-equal" onclick="calculate()">=</button>
+            
+
+        </div>
+    </div>
+    <script>
+        function clearScreen() {
+            document.getElementById("display").value = "";
+        }
+
+        function deleteLast() {
+            let display = document.getElementById("display").value;
+            document.getElementById("display").value = display.substring(0, display.length - 1);
+        }
+
+        function appendToScreen(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function calculate() {
+            let display = document.getElementById("display").value;
+            try {
+                document.getElementById("display").value = eval(display);
+            } catch (e) {
+                alert("Invalid expression");
+            }
+        }
+    </script>
+</body>
+</html>
